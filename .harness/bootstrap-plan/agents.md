@@ -45,6 +45,34 @@
 - pawn-ai → IPawnQuery
 - building-economy → IResourceQuery
 
+#### Query API 시그니처 초안
+```csharp
+// core-engine 제공
+interface ITilemapQuery {
+    TileData GetTile(int x, int y);
+    bool IsWalkable(int x, int y);
+    int GetRegionId(int x, int y);
+}
+interface ITimeQuery {
+    long GetCurrentTick();
+    GameSpeed GetSpeed();
+    bool IsPaused();
+}
+
+// pawn-ai 제공
+interface IPawnQuery {
+    PawnData? GetPawnById(EntityId id);
+    IReadOnlyList<EntityId> GetIdlePawns();
+    IReadOnlyList<EntityId> GetPawnsInRadius(Vec2 center, float radius);
+}
+
+// building-economy 제공
+interface IResourceQuery {
+    int GetStockCount(string itemDefId);
+    bool CanAfford(ResourceCost[] costs);
+}
+```
+
 ### ECS 컴포넌트 소유권 (CQRS 변형)
 - 자기 관할: 직접 R/W 허용
 - 타 시스템: Read는 Query API, Write는 이벤트 버스만

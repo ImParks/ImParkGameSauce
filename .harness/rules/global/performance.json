@@ -24,6 +24,17 @@
         "buildingProduction": { "ms": 1, "percent": 5 },
         "reserve": { "ms": 2, "percent": 10 }
       },
+      "moduleBudget": {
+        "note": "Module 활성 시 reserve 2ms + worldSim 2ms = 4ms를 Module들이 공유",
+        "temperature": { "ms": 0.5, "frequency": "2틱마다 (실질 0.25ms/틱)" },
+        "weather": { "ms": 0.2, "frequency": "10틱마다 (실질 0.02ms/틱)" },
+        "power": { "ms": 0.3, "frequency": "5틱마다 (실질 0.06ms/틱)" },
+        "relations": { "ms": 0.2, "frequency": "5틱마다 (실질 0.04ms/틱)" },
+        "medical": { "ms": 0.3, "frequency": "매틱 (감염 진행 등)" },
+        "animal": { "ms": 0.5, "frequency": "매틱 (야생 동물 AI)" },
+        "faction": { "ms": 0.1, "frequency": "100틱마다 (실질 무시 가능)" },
+        "totalPerTick": "최대 2ms (worldSim 예산 내), 초과 시 reserve 2ms 사용"
+      },
       "speedStrategy": {
         "4x": "AI 시간분할(틱당 25% 풀평가, 긴급 폰 항상), 경로 캐시, 월드 2틱마다, 최소 30FPS"
       },

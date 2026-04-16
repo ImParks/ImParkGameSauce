@@ -1,0 +1,185 @@
+{
+  "id": "feedback-20260416-bootstrap-001",
+  "stage": "plan_evaluation",
+  "loopNumber": 1,
+  "timestamp": "2026-04-16T00:00:00Z",
+  "overallScore": 79.40,
+  "passThreshold": 95,
+  "categoryScores": [
+    {
+      "category": "에이전트 구성 적합성",
+      "score": 78,
+      "maxScore": 100,
+      "weight": 0.25,
+      "deductions": [
+        {
+          "description": "building-economy 에이전트가 건설/구역/자원/전투/전력 5개 이상 시스템을 담당하여 범위 과부하",
+          "points": -8,
+          "severity": "major",
+          "suggestion": "전투를 pawn-ai로 이관하거나, building-zone과 economy-combat으로 분리"
+        },
+        {
+          "description": "온도/질병/동물/관계 Module 시스템 담당 에이전트 불분명",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "Module 시스템 8개 전수를 담당 에이전트에 명시적 매핑"
+        },
+        {
+          "description": "경로탐색 담당 이중 배치 - core-engine 담당이나 Phase 2에서 pawn-ai와의 협업 인터페이스 부재",
+          "points": -4,
+          "severity": "minor",
+          "suggestion": "경로탐색 API 인터페이스 계약 명시"
+        },
+        {
+          "description": "에이전트 간 인터페이스 정의 부재 - 데이터 흐름과 API 계약 미정의",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "주요 에이전트 간 의존 관계와 이벤트 버스 토픽 초안 포함"
+        }
+      ]
+    },
+    {
+      "category": "스펙 충족도",
+      "score": 75,
+      "maxScore": 100,
+      "weight": 0.25,
+      "deductions": [
+        {
+          "description": "Module 시스템 8개 중 4개(온도/관계/질병의료/동물) 커버리지 누락",
+          "points": -8,
+          "severity": "critical",
+          "suggestion": "8개 Module 각각의 담당 에이전트와 구현 Phase 명시"
+        },
+        {
+          "description": "레크리에이션 관용도(Tolerance) 시스템 누락",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "Phase 3 니즈 구현 시 관용도 시스템 명시적 포함"
+        },
+        {
+          "description": "빌(Bill) 큐 시스템 명시 부재",
+          "points": -4,
+          "severity": "major",
+          "suggestion": "Phase 3에서 빌 큐 시스템을 독립 항목으로 분리"
+        },
+        {
+          "description": "구역(Zone) 4종 상세 누락",
+          "points": -3,
+          "severity": "minor",
+          "suggestion": "구역 유형별 요구사항을 Phase 3 세부 항목으로 분리"
+        },
+        {
+          "description": "인공 신체/의료 시스템 계획 부재",
+          "points": -3,
+          "severity": "minor",
+          "suggestion": "Phase 2~3에 신체 부위 + 의료 행동 마일스톤 추가"
+        },
+        {
+          "description": "품질 7단계 시스템 누락",
+          "points": -2,
+          "severity": "minor",
+          "suggestion": "자원/생산 구현 시 품질 시스템 포함"
+        }
+      ]
+    },
+    {
+      "category": "실현 가능성",
+      "score": 82,
+      "maxScore": 100,
+      "weight": 0.20,
+      "deductions": [
+        {
+          "description": "building-economy 에이전트 과부하로 병렬 작업 병목",
+          "points": -6,
+          "severity": "major",
+          "suggestion": "전투 분리 또는 건설/구역 일부를 core-engine으로 이관"
+        },
+        {
+          "description": "Phase 간 의존성 미분석 - 전투/기분 등의 선행 조건 불명확",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "Phase별 의존 관계 DAG 작성"
+        },
+        {
+          "description": "기술 스택 미결정 상태에서 구현 Phase 확정",
+          "points": -4,
+          "severity": "major",
+          "suggestion": "Phase 1 이전에 기술 스택 결정 단계 포함"
+        },
+        {
+          "description": "모딩 시스템 Phase 6 후순위 배치 위험",
+          "points": -3,
+          "severity": "minor",
+          "suggestion": "모딩 기반 구조는 Phase 1 Def 설계에 함께 반영"
+        }
+      ]
+    },
+    {
+      "category": "확장성/유연성",
+      "score": 85,
+      "maxScore": 100,
+      "weight": 0.15,
+      "deductions": [
+        {
+          "description": "이벤트 버스 구체적 설계 부재 (동기/비동기, 토픽 구조, 페이로드)",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "Phase 1에 이벤트 버스 기본 구현 추가, 토픽 카테고리 사전 정의"
+        },
+        {
+          "description": "ECS와 Def 시스템 관계 미정의 - Def가 엔티티 템플릿인지 수치 외부화인지 불명확",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "Def-to-Entity 매핑 규칙 추가"
+        },
+        {
+          "description": "모듈 ON/OFF 메커니즘 부재",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "인터페이스 + no-op 패턴 규칙 추가"
+        }
+      ]
+    },
+    {
+      "category": "규칙 완성도",
+      "score": 80,
+      "maxScore": 100,
+      "weight": 0.15,
+      "deductions": [
+        {
+          "description": "틱 예산 규칙에 구체적 수치 없음",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "구체적 예산 분배 또는 벤치마크 계획 명시"
+        },
+        {
+          "description": "직렬화 규칙에 버전 마이그레이션/포맷 전략 없음",
+          "points": -5,
+          "severity": "major",
+          "suggestion": "by-feature/serialization 규칙 추가"
+        },
+        {
+          "description": "이벤트 버스 규칙과 ECS 컴포넌트 직접 접근의 경계 불명확",
+          "points": -4,
+          "severity": "major",
+          "suggestion": "시스템 자기 관할 컴포넌트 직접 R/W 허용, 다른 시스템 부수효과는 이벤트 버스로 명확화"
+        },
+        {
+          "description": "네이밍/코딩 컨벤션 규칙 부재",
+          "points": -3,
+          "severity": "minor",
+          "suggestion": "global/ 규칙에 네이밍 컨벤션 추가"
+        },
+        {
+          "description": "테스트 규칙 부재",
+          "points": -3,
+          "severity": "minor",
+          "suggestion": "최소 테스트 범위/방식 규칙 추가"
+        }
+      ]
+    }
+  ],
+  "exceptions": [],
+  "generatedRules": [],
+  "outcome": "feedback_sent"
+}

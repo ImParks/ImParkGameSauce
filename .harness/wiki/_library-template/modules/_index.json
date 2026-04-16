@@ -1,0 +1,12 @@
+{
+  "description": "이 라이브러리의 모듈/함수 목록. 에이전트는 여기서 필요한 모듈만 찾아서 개별 파일을 읽습니다.",
+  "modules": [],
+  "moduleSchema": {
+    "id": "모듈 고유 ID (예: use-query, create-store)",
+    "name": "표시명",
+    "category": "분류 (예: hooks, utils, components)",
+    "summary": "한 줄 요약",
+    "file": "use-query.md",
+    "tags": ["관련 태그"]
+  }
+}

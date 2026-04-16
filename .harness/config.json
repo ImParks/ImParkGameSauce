@@ -1,13 +1,15 @@
 {
   "bootstrapped": false,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "workflow": {
     "passScore": 95,
     "maxScore": 100,
-    "maxFeedbackLoops": 3,
-    "maxFeedbackLoopsNote": "3회 반복 후에도 95점 미달 시 사용자에게 판단 위임"
+    "maxFeedbackLoops": 10,
+    "maxFeedbackLoopsNote": "10회 반복 후에도 95점 미달 시 사용자에게 판단 위임"
   },
   "stages": [
+    "request_triage",
+    "discovery",
     "plan_discussion",
     "plan_evaluation",
     "plan_report",
@@ -15,6 +17,10 @@
     "implementation_evaluation",
     "final_report"
   ],
+  "stageNotes": {
+    "request_triage": "사용자 요청을 분류: 구현 요청이면 plan_discussion으로, 탐색/질문이면 discovery로",
+    "discovery": "서브 에이전트들이 병렬로 선택지를 탐색하고, 메인 에이전트가 비교표로 종합하여 사용자에게 제안. 사용자 선택 후 plan_discussion으로 진행"
+  },
   "ruleLookupOrder": [
     "global",
     "by-path",

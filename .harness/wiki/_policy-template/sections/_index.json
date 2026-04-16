@@ -1,0 +1,12 @@
+{
+  "description": "이 정책 문서의 조항 목록. 에이전트는 여기서 필요한 조항만 찾아서 개별 파일을 읽습니다.",
+  "sections": [],
+  "sectionSchema": {
+    "id": "조항 고유 ID (예: privacy-collection, refund-policy)",
+    "title": "조항 제목",
+    "summary": "한 줄 요약",
+    "file": "privacy-collection.md",
+    "tags": ["관련 태그"],
+    "mandatory": "이 조항이 구현 시 반드시 준수해야 하는지 여부 (true/false)"
+  }
+}

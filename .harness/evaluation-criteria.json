@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "note": "부트스트랩 토론을 통해 평가 기준이 결정됩니다. 아래는 초기 스키마입니다.",
+  "planEvaluation": {
+    "description": "계획 평가 기준",
+    "categories": []
+  },
+  "implementationEvaluation": {
+    "description": "구현 평가 기준",
+    "categories": []
+  },
+  "categorySchema": {
+    "name": "평가 항목명",
+    "weight": "가중치 (전체 합 100)",
+    "maxScore": 100,
+    "criteria": [
+      {
+        "description": "세부 기준 설명",
+        "deductionPoints": "미충족 시 감점 점수",
+        "severity": "critical | major | minor"
+      }
+    ]
+  },
+  "exceptionHandling": {
+    "description": "예외 처리된 항목은 감점 대상에서 제외",
+    "requiredFields": ["exception", "rule_id", "reason", "approved_by", "context"]
+  }
+}

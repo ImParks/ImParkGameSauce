@@ -1,0 +1,36 @@
+{
+  "schema": "피드백 로그 템플릿 - 실제 로그 파일은 이 형식을 따릅니다",
+  "feedbackLogSchema": {
+    "id": "feedback-YYYYMMDD-HHMMSS-NNN",
+    "stage": "plan_evaluation | implementation_evaluation",
+    "loopNumber": "현재 피드백 루프 회차 (1~maxFeedbackLoops)",
+    "timestamp": "ISO 8601 형식",
+    "overallScore": 0,
+    "categoryScores": [
+      {
+        "category": "평가 항목명",
+        "score": 0,
+        "maxScore": 100,
+        "deductions": [
+          {
+            "description": "감점 사유",
+            "points": 0,
+            "severity": "critical | major | minor",
+            "affectedPaths": ["관련 파일 경로"],
+            "affectedFeatures": ["관련 기능"],
+            "suggestion": "수정 제안"
+          }
+        ]
+      }
+    ],
+    "exceptions": [
+      {
+        "rule_id": "예외 처리된 규칙 ID",
+        "reason": "예외 사유",
+        "accepted": true
+      }
+    ],
+    "generatedRules": ["이 피드백에서 생성된 규칙 ID 목록"],
+    "outcome": "passed | feedback_sent | escalated_to_user"
+  }
+}

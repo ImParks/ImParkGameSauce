@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "note": "부트스트랩 토론을 통해 에이전트 구성이 결정됩니다. 아래는 초기 스키마입니다.",
+  "orchestrator": {
+    "id": "main",
+    "role": "오케스트레이터",
+    "description": "사용자 요청 분석, 서브 에이전트에 작업 분배, 결과 종합, 규칙 전파",
+    "capabilities": [
+      "request_analysis",
+      "task_distribution",
+      "result_synthesis",
+      "rule_propagation",
+      "agent_registry_management"
+    ]
+  },
+  "evaluators": [],
+  "producers": [],
+  "agentSchema": {
+    "id": "고유 식별자",
+    "role": "에이전트 역할명",
+    "domain": "담당 도메인",
+    "description": "상세 역할 설명",
+    "capabilities": ["가능한 작업 목록"],
+    "rulesScope": ["참조할 규칙 범위 (global, by-path/경로, by-feature/기능, by-agent/자신)"],
+    "createdBy": "bootstrap_discussion | runtime_discussion",
+    "createdAt": "생성 시점",
+    "active": true
+  }
+}

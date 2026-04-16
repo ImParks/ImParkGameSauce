@@ -1,0 +1,30 @@
+{
+  "bootstrapped": false,
+  "version": "1.0.0",
+  "workflow": {
+    "passScore": 95,
+    "maxScore": 100,
+    "maxFeedbackLoops": 3,
+    "maxFeedbackLoopsNote": "3회 반복 후에도 95점 미달 시 사용자에게 판단 위임"
+  },
+  "stages": [
+    "plan_discussion",
+    "plan_evaluation",
+    "plan_report",
+    "implementation",
+    "implementation_evaluation",
+    "final_report"
+  ],
+  "ruleLookupOrder": [
+    "global",
+    "by-path",
+    "by-feature",
+    "by-agent"
+  ],
+  "learning": {
+    "autoCreateRuleOnDeduction": true,
+    "autoCreateRuleNote": "평가에서 감점 발생 시 자동으로 방지 규칙 생성",
+    "rulePathSeparator": "__",
+    "rulePathSeparatorNote": "파일 경로의 /를 __로 치환하여 규칙 파일명 생성"
+  }
+}

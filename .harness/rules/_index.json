@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "description": "모든 규칙의 메타데이터 인덱스. 에이전트가 작업 시작 전 이 파일을 조회하여 관련 규칙을 빠르게 찾습니다.",
+  "rules": [],
+  "ruleSchema": {
+    "id": "규칙 고유 ID (예: rule-001)",
+    "title": "규칙 제목",
+    "location": "규칙 파일 경로 (예: by-path/src__components.json)",
+    "tags": ["관련 태그"],
+    "pathPatterns": ["매칭 경로 패턴 (예: src/components/**)"],
+    "featureDomains": ["관련 기능 도메인"],
+    "agents": ["관련 에이전트 ID"],
+    "severity": "critical | major | minor",
+    "createdAt": "생성일",
+    "createdFrom": "평가 피드백 ID 또는 사용자 지정",
+    "active": true
+  },
+  "lookupGuide": {
+    "step1": "_index.json의 rules 배열에서 pathPatterns, featureDomains, agents 필드를 기준으로 매칭",
+    "step2": "매칭된 규칙의 location 경로에서 상세 규칙 파일을 읽기",
+    "step3": "global/ 폴더의 규칙은 항상 포함",
+    "step4": "상위 경로 규칙도 포함 (src/components/Button.tsx → src.json + src__components.json)"
+  }
+}

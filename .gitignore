@@ -24,6 +24,7 @@ hs_err_pid*
 replay_pid*
 
 # Environment variables (secrets)
+# .env: 로컬 서버 실행용 키 저장 (MCP용은 ~/.zshrc에 별도 관리)
 .env
 .env.local
 .env.*.local

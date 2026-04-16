@@ -19,14 +19,34 @@
       "title": "파일 분할 - 소스 코드",
       "severity": "minor",
       "deductionPoints": 2,
-      "content": "소스 코드 분할은 단일 책임(SRP) 기준. 300줄 초과 시 분할 필수, 300줄 미만이라도 관심사 혼재/변경 빈도 차이 시 즉시 분할.",
-      "splitPattern": {
-        "system": "폴더 승격 + SubSystem 패턴. 예: NeedsSystem.ts → needs/ (index.ts + HungerSubSystem.ts + RestSubSystem.ts + NeedsSystem.ts 오케스트레이터)",
-        "component": "항상 함께 부착되는 컴포넌트는 1파일(최대 3개). 독립 부착 가능한 컴포넌트는 별도 파일.",
-        "defType": "카테고리별 파일. 길어지면 base + extensions 분리.",
-        "test": "소스 분할을 따라감. 오케스트레이터(통합) + 서브시스템(단위) 분리."
+      "content": "소스 코드는 도메인 기반 폴더 구조를 사용한다. 300줄 초과 시 함수의 역할에 따라 파일을 분리한다. 300줄 미만이라도 관심사 혼재 시 즉시 분할.",
+      "directoryStructure": {
+        "principle": "큰 도메인 폴더를 만들고, 하위에 역할별 레이어/파일을 배치한다. 전역 설정/유틸은 도메인 안에 넣지 않고 같은 계층의 global/common 폴더에 둔다.",
+        "example": {
+          "src/": "루트",
+          "src/global/": "전역 설정, 공용 유틸, 공용 타입/인터페이스 (모든 도메인이 참조)",
+          "src/pawn/": "폰 도메인 (큰 도메인)",
+          "src/pawn/index.ts": "배럴 - 외부 공개 API만 re-export",
+          "src/pawn/PawnEntity.ts": "폰 엔티티 생성/관리",
+          "src/pawn/needs/": "하위 레이어 - 니즈 관련 함수/클래스",
+          "src/pawn/combat/": "하위 레이어 - 전투 관련",
+          "src/pawn/body/": "하위 레이어 - 신체 부위",
+          "src/building/": "건설 도메인",
+          "src/economy/": "경제 도메인",
+          "src/event/": "이벤트 도메인"
+        },
+        "note": "레이어 구현 방식은 기술 스택 결정(Phase 0) 후 구체화. 현재는 도메인 → 하위 레이어 원칙만 확정."
       },
-      "barrel": "폴더 승격 시 index.ts 필수. re-export만 허용, export * 금지. 외부는 배럴을 통해서만 import.",
+      "splitTrigger": {
+        "300줄 초과": "함수의 역할에 따라 파일 분리 (1순위). 관련 함수끼리 묶어 별도 파일로.",
+        "관심사 혼재": "줄 수와 무관하게 즉시 분리",
+        "변경 빈도 차이": "자주 바뀌는 부분과 안정적 부분을 분리"
+      },
+      "globalVsDomain": {
+        "global에 둘 것": "공용 타입/인터페이스, 유틸 함수, 전역 설정/상수, 이벤트 버스 코어, ECS 프레임워크",
+        "도메인에 둘 것": "해당 도메인 전용 로직, 도메인 전용 컴포넌트, 도메인 전용 Def 타입"
+      },
+      "barrel": "도메인 폴더에 index.ts 필수. re-export만 허용, export * 금지. 외부는 배럴을 통해서만 import.",
       "noSplit": "상태 기계(전이 테이블), 순수 타입 정의(500줄까지), 테스트(소스 1:1)"
     },
     {

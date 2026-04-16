@@ -1,5 +1,5 @@
 {
-  "bootstrapped": false,
+  "bootstrapped": true,
   "version": "1.1.0",
   "workflow": {
     "passScore": 95,

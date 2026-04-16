@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "description": "부트스트랩 통합 계획서 v2 - 피드백 루프 1회차 반영",
+  "files": [
+    { "id": "agents", "path": "agents.md", "desc": "에이전트 구성 + Module 매핑 + 인터페이스" },
+    { "id": "rules", "path": "rules.md", "desc": "글로벌 규칙 11개 (수치화)" },
+    { "id": "phases", "path": "phases.md", "desc": "구현 Phase 0~6 + DAG + 세부 항목" },
+    { "id": "evaluation", "path": "evaluation.md", "desc": "평가 기준 + 단계별 가중치" }
+  ]
+}

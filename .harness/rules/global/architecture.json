@@ -1,0 +1,63 @@
+{
+  "description": "아키텍처 관련 글로벌 규칙",
+  "rules": [
+    {
+      "id": "RULE-001",
+      "title": "ECS 우선",
+      "severity": "major",
+      "deductionPoints": 5,
+      "content": "게임 오브젝트는 100% Entity+Component 구성. class 상속 게임 오브젝트 0개. Component에 메서드 0개(순수 데이터), 로직은 System에만 존재.",
+      "exceptions": "유틸리티 클래스, UI 위젯은 ECS 대상 아님",
+      "measurement": "코드 리뷰 시 Component 파일에 메서드 유무 검사"
+    },
+    {
+      "id": "RULE-005",
+      "title": "레이어 방향",
+      "severity": "critical",
+      "deductionPoints": 8,
+      "content": "Core → Data → Logic → Presentation 방향만 허용. 역방향 의존 0건, 순환 의존 0건.",
+      "measurement": "import 분석 도구로 의존성 그래프 생성, CI 자동 검증"
+    },
+    {
+      "id": "RULE-006",
+      "title": "경로 분리",
+      "severity": "minor",
+      "deductionPoints": 2,
+      "content": "디렉토리: src/core, src/systems, src/components, src/modules, src/ui, src/save, data/defs, data/mods. 단일 파일 300줄, 단일 함수 50줄 제한."
+    },
+    {
+      "id": "RULE-007",
+      "title": "이벤트 버스 (ECS 경계)",
+      "severity": "major",
+      "deductionPoints": 5,
+      "content": "자기 관할 컴포넌트: 직접 R/W 허용. 타 시스템 변경: 반드시 이벤트 버스 경유. 시스템 간 직접 메서드 호출 0건. 이벤트: 동기 디스패치, 불변 페이로드. 토픽: 'domain.action' 형식.",
+      "topicCategories": ["time.*", "tile.*", "path.*", "temperature.*", "weather.*", "pawn.*", "relation.*", "medical.*", "animal.*", "event.*", "raid.*", "faction.*", "building.*", "zone.*", "power.*", "resource.*", "item.*", "bill.*", "combat.*", "save.*", "mod.*", "ui.*"],
+      "syncTopics": ["time.tick", "combat.damage", "resource.reserved", "raid.spawned", "save.started", "mod.loaded"],
+      "asyncTopics": ["tile.changed", "pawn.state-changed", "item.produced", "building.placed", "temperature.changed"]
+    },
+    {
+      "id": "RULE-008",
+      "title": "Def-Entity 매핑",
+      "severity": "major",
+      "deductionPoints": 5,
+      "content": "DEF-001: Def는 읽기 전용, 런타임 상태는 컴포넌트에. DEF-002: DefDatabase 글로벌 싱글턴, 시작 시 1회 로드. DEF-003: 모든 엔티티에 DefRefComponent 필수. DEF-004: 조건부 컴포넌트(module OFF 시 생략). DEF-005: statBases(밸런스) vs defaults(구조적 초기값) 분리.",
+      "defRoles": {
+        "entityTemplate": ["ThingDef", "PawnKindDef", "BuildingDef", "PlantDef", "AnimalDef"],
+        "dataExternalization": ["NeedDef", "SkillDef", "TraitDef", "ResearchDef", "RecipeDef", "BiomeDef", "EventDef"]
+      }
+    },
+    {
+      "id": "RULE-009",
+      "title": "모듈 ON/OFF",
+      "severity": "critical",
+      "deductionPoints": 8,
+      "content": "모든 Module 시스템은 IGameModule 인터페이스 구현 필수. OFF 시 no-op 기본값 반환. 비활성 이벤트 미발행. Def condition 비활성 시 컴포넌트 생략. 비활성 세이브 데이터 보존(재활성 복원).",
+      "noopDefaults": {
+        "temperature": 21.0,
+        "power": "항상 공급",
+        "relations": 0,
+        "weather": "맑음"
+      }
+    }
+  ]
+}

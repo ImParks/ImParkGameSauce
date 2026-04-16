@@ -1,0 +1,37 @@
+{
+  "id": "feedback-20260416-bootstrap-002",
+  "stage": "plan_evaluation",
+  "loopNumber": 2,
+  "timestamp": "2026-04-16T00:00:00Z",
+  "overallScore": 96.20,
+  "passThreshold": 95,
+  "categoryScores": [
+    { "category": "에이전트 구성 적합성", "score": 96, "weight": 0.25, "deductions": [
+      { "description": "building-economy 여전히 6개 시스템 최다 담당 (minor)", "points": -2, "severity": "minor" },
+      { "description": "Query API 시그니처 미정의 (minor)", "points": -2, "severity": "minor" }
+    ]},
+    { "category": "스펙 충족도", "score": 97, "weight": 0.25, "deductions": [
+      { "description": "스킬 12종/열정/감쇠 Phase 배치 미명시 (minor)", "points": -2, "severity": "minor" },
+      { "description": "특성 시스템 Phase 배치 미명시 (minor)", "points": -1, "severity": "minor" }
+    ]},
+    { "category": "실현 가능성", "score": 95, "weight": 0.20, "deductions": [
+      { "description": "Phase 3 building-economy 병렬 병목 가능성 (minor)", "points": -3, "severity": "minor" },
+      { "description": "Phase 5A/5B 조기 착수 범위 불명확 (minor)", "points": -2, "severity": "minor" }
+    ]},
+    { "category": "확장성/유연성", "score": 97, "weight": 0.15, "deductions": [
+      { "description": "이벤트 페이로드 타입 안전성 전략 미언급 (minor)", "points": -2, "severity": "minor" },
+      { "description": "동일 에이전트 내 시스템 간 직접 Read 허용 경계 불명확 (minor)", "points": -1, "severity": "minor" }
+    ]},
+    { "category": "규칙 완성도", "score": 96, "weight": 0.15, "deductions": [
+      { "description": "Module 틱 예산 미분배 (minor)", "points": -2, "severity": "minor" },
+      { "description": "통합/시나리오 테스트 전략 부재 (minor)", "points": -2, "severity": "minor" }
+    ]}
+  ],
+  "previousLoopResolution": {
+    "critical_resolved": 3,
+    "major_resolved": 6,
+    "minor_resolved": 4,
+    "total_resolved": 13
+  },
+  "outcome": "passed"
+}

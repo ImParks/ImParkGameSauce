@@ -1,29 +1,102 @@
 {
-  "version": "1.0.0",
-  "note": "부트스트랩 토론을 통해 에이전트 구성이 결정됩니다. 아래는 초기 스키마입니다.",
+  "version": "2.0.0",
   "orchestrator": {
     "id": "main",
     "role": "오케스트레이터",
     "description": "사용자 요청 분석, 서브 에이전트에 작업 분배, 결과 종합, 규칙 전파",
-    "capabilities": [
-      "request_analysis",
-      "task_distribution",
-      "result_synthesis",
-      "rule_propagation",
-      "agent_registry_management"
-    ]
+    "capabilities": ["request_analysis", "task_distribution", "result_synthesis", "rule_propagation", "agent_registry_management"]
   },
-  "evaluators": [],
-  "producers": [],
-  "agentSchema": {
-    "id": "고유 식별자",
-    "role": "에이전트 역할명",
-    "domain": "담당 도메인",
-    "description": "상세 역할 설명",
-    "capabilities": ["가능한 작업 목록"],
-    "rulesScope": ["참조할 규칙 범위 (global, by-path/경로, by-feature/기능, by-agent/자신)"],
-    "createdBy": "bootstrap_discussion | runtime_discussion",
-    "createdAt": "생성 시점",
-    "active": true
-  }
+  "evaluators": [
+    {
+      "id": "evaluator",
+      "role": "평가 에이전트",
+      "domain": "품질 평가",
+      "description": "계획/구현물을 evaluation-criteria.json 기준으로 채점, 피드백 생성, 규칙 자동 생성",
+      "capabilities": ["plan_evaluation", "implementation_evaluation", "feedback_generation", "rule_suggestion"],
+      "rulesScope": ["global", "by-agent/evaluator"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    }
+  ],
+  "producers": [
+    {
+      "id": "core-engine",
+      "role": "엔진 기반 에이전트",
+      "domain": "게임 엔진 코어",
+      "description": "타일맵, 시간 시스템, 이벤트 버스, Def 로더, 경로탐색, 모듈 레지스트리",
+      "capabilities": ["tilemap", "time_system", "event_bus", "def_loader", "pathfinding", "module_registry"],
+      "coreSystems": ["타일맵", "시간", "이벤트 버스", "Def 로더", "경로탐색", "모듈 레지스트리"],
+      "moduleSystems": [],
+      "rulesScope": ["global", "by-path/src__core", "by-path/src__engine", "by-feature/ecs", "by-feature/tilemap", "by-feature/event-bus", "by-agent/core-engine"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    },
+    {
+      "id": "pawn-ai",
+      "role": "폰/AI 에이전트",
+      "domain": "폰 행동 및 상태",
+      "description": "폰 엔티티, 니즈, AI 행동트리, 전투, 신체 부위, 관계/질병의료 모듈",
+      "capabilities": ["pawn_entity", "needs_system", "behavior_tree", "combat_system", "body_parts", "relationship_module", "medical_module"],
+      "coreSystems": ["폰", "니즈", "AI 행동트리", "전투", "신체 부위"],
+      "moduleSystems": ["관계", "질병/의료"],
+      "rulesScope": ["global", "by-path/src__pawn", "by-path/src__ai", "by-feature/pawn", "by-feature/needs", "by-feature/combat", "by-agent/pawn-ai"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    },
+    {
+      "id": "world-event",
+      "role": "이벤트/스토리 에이전트",
+      "domain": "이벤트 시스템 및 스토리텔러",
+      "description": "랜덤 이벤트, 스토리텔러 AI 3종, 난이도 곡선, 파벌/외교 모듈",
+      "capabilities": ["event_system", "storyteller", "difficulty_curve", "faction_module", "diplomacy_module"],
+      "coreSystems": ["이벤트/스토리텔러", "난이도"],
+      "moduleSystems": ["파벌/외교"],
+      "rulesScope": ["global", "by-path/src__event", "by-feature/event", "by-feature/storyteller", "by-agent/world-event"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    },
+    {
+      "id": "building-economy",
+      "role": "건설/경제 에이전트",
+      "domain": "건설, 구역, 자원 경제",
+      "description": "건물 배치/해체, 구역 4종, 자원/생산 체인, 빌 큐, 품질 7단계, 전력 모듈",
+      "capabilities": ["building_placement", "zone_management", "resource_chain", "bill_queue", "quality_system", "power_module"],
+      "coreSystems": ["건설", "구역", "자원/생산", "빌 큐", "품질"],
+      "moduleSystems": ["전력"],
+      "rulesScope": ["global", "by-path/src__building", "by-path/src__economy", "by-feature/building", "by-feature/economy", "by-feature/zone", "by-agent/building-economy"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    },
+    {
+      "id": "environment-life",
+      "role": "환경/생물 에이전트",
+      "domain": "환경 시뮬레이션 및 동물",
+      "description": "온도 시뮬레이션, 날씨 효과, 동물 시스템 (야생/길들이기/방목)",
+      "capabilities": ["temperature_system", "weather_effects", "animal_system"],
+      "coreSystems": [],
+      "moduleSystems": ["온도", "날씨", "동물"],
+      "rulesScope": ["global", "by-path/src__environment", "by-feature/temperature", "by-feature/weather", "by-feature/animal", "by-agent/environment-life"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    },
+    {
+      "id": "ui-data",
+      "role": "UI/데이터 에이전트",
+      "domain": "UI 렌더링과 데이터 영속성",
+      "description": "게임 UI 전체, 세이브/로드, 직렬화, 모딩 API",
+      "capabilities": ["ui_rendering", "save_load", "serialization", "modding_api"],
+      "coreSystems": ["UI", "세이브/로드"],
+      "moduleSystems": ["모딩"],
+      "rulesScope": ["global", "by-path/src__ui", "by-path/src__save", "by-feature/ui", "by-feature/serialization", "by-feature/modding", "by-agent/ui-data"],
+      "createdBy": "bootstrap_discussion",
+      "createdAt": "2026-04-16",
+      "active": true
+    }
+  ]
 }

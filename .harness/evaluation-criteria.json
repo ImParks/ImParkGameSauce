@@ -1,25 +1,126 @@
 {
-  "version": "1.0.0",
-  "note": "부트스트랩 토론을 통해 평가 기준이 결정됩니다. 아래는 초기 스키마입니다.",
+  "version": "2.0.0",
   "planEvaluation": {
     "description": "계획 평가 기준",
-    "categories": []
-  },
-  "implementationEvaluation": {
-    "description": "구현 평가 기준",
-    "categories": []
-  },
-  "categorySchema": {
-    "name": "평가 항목명",
-    "weight": "가중치 (전체 합 100)",
-    "maxScore": 100,
-    "criteria": [
+    "categories": [
       {
-        "description": "세부 기준 설명",
-        "deductionPoints": "미충족 시 감점 점수",
-        "severity": "critical | major | minor"
+        "name": "에이전트 구성 적합성",
+        "weight": 25,
+        "maxScore": 100,
+        "criteria": [
+          { "description": "에이전트 간 역할 분리 명확성", "deductionPoints": 5, "severity": "major" },
+          { "description": "에이전트 간 부하 균형", "deductionPoints": 3, "severity": "minor" },
+          { "description": "에이전트 간 인터페이스(이벤트 토픽, Query API) 정의", "deductionPoints": 5, "severity": "major" },
+          { "description": "Module 시스템 전수 매핑", "deductionPoints": 8, "severity": "critical" }
+        ]
+      },
+      {
+        "name": "스펙 충족도",
+        "weight": 25,
+        "maxScore": 100,
+        "criteria": [
+          { "description": "Core 8 시스템 커버리지", "deductionPoints": 8, "severity": "critical" },
+          { "description": "Module 8 시스템 커버리지", "deductionPoints": 8, "severity": "critical" },
+          { "description": "세부 시스템 독립 항목 분리", "deductionPoints": 3, "severity": "minor" }
+        ]
+      },
+      {
+        "name": "실현 가능성",
+        "weight": 20,
+        "maxScore": 100,
+        "criteria": [
+          { "description": "Phase 의존 DAG 및 병렬 가능성 명시", "deductionPoints": 5, "severity": "major" },
+          { "description": "기술 스택 결정 시점 명시", "deductionPoints": 4, "severity": "major" },
+          { "description": "모딩 기반 구조 Phase 1 반영", "deductionPoints": 3, "severity": "minor" }
+        ]
+      },
+      {
+        "name": "확장성/유연성",
+        "weight": 15,
+        "maxScore": 100,
+        "criteria": [
+          { "description": "이벤트 버스 설계 (토픽, 동기/비동기, 페이로드)", "deductionPoints": 5, "severity": "major" },
+          { "description": "Def↔ECS 매핑 규칙", "deductionPoints": 5, "severity": "major" },
+          { "description": "모듈 ON/OFF 메커니즘", "deductionPoints": 5, "severity": "major" },
+          { "description": "ECS↔이벤트 버스 경계 (CQRS)", "deductionPoints": 4, "severity": "major" }
+        ]
+      },
+      {
+        "name": "규칙 완성도",
+        "weight": 15,
+        "maxScore": 100,
+        "criteria": [
+          { "description": "규칙 수치화 (측정 가능한 기준)", "deductionPoints": 5, "severity": "major" },
+          { "description": "틱 예산 구체적 수치", "deductionPoints": 5, "severity": "major" },
+          { "description": "직렬화 전략 구체성", "deductionPoints": 5, "severity": "major" },
+          { "description": "네이밍/테스트 규칙", "deductionPoints": 3, "severity": "minor" }
+        ]
       }
     ]
+  },
+  "implementationEvaluation": {
+    "description": "구현 평가 기준 - Phase별 가중치 변동",
+    "phaseWeights": {
+      "phase-1-2": { "architecture": 35, "performance": 15, "dataExternalization": 25, "codeQuality": 15, "specCoverage": 10 },
+      "phase-3-4": { "architecture": 25, "performance": 20, "dataExternalization": 20, "codeQuality": 15, "specCoverage": 20 },
+      "phase-5": { "architecture": 20, "performance": 25, "dataExternalization": 15, "codeQuality": 15, "specCoverage": 25 },
+      "phase-6": { "architecture": 15, "performance": 20, "dataExternalization": 20, "codeQuality": 20, "specCoverage": 25 }
+    },
+    "categories": [
+      {
+        "name": "아키텍처",
+        "maxScore": 100,
+        "criteria": [
+          { "description": "ECS 패턴 준수 (상속 0, Component 메서드 0)", "deductionPoints": 5, "severity": "major" },
+          { "description": "레이어 방향 위반", "deductionPoints": 8, "severity": "critical" },
+          { "description": "이벤트 버스 우회 (시스템 간 직접 호출)", "deductionPoints": 5, "severity": "major" },
+          { "description": "모듈 인터페이스 미구현", "deductionPoints": 8, "severity": "critical" }
+        ]
+      },
+      {
+        "name": "성능",
+        "maxScore": 100,
+        "criteria": [
+          { "description": "틱 예산 초과 코드", "deductionPoints": 8, "severity": "critical" },
+          { "description": "AI LOD 미적용", "deductionPoints": 5, "severity": "major" },
+          { "description": "경로탐색 비효율", "deductionPoints": 3, "severity": "minor" }
+        ]
+      },
+      {
+        "name": "데이터 외부화",
+        "maxScore": 100,
+        "criteria": [
+          { "description": "밸런스 값 하드코딩", "deductionPoints": 3, "severity": "major" },
+          { "description": "Def 없는 게임 오브젝트", "deductionPoints": 5, "severity": "major" },
+          { "description": "직렬화 미구현 컴포넌트", "deductionPoints": 8, "severity": "critical" },
+          { "description": "마이그레이터 누락", "deductionPoints": 5, "severity": "major" }
+        ]
+      },
+      {
+        "name": "코드 품질",
+        "maxScore": 100,
+        "criteria": [
+          { "description": "네이밍 컨벤션 위반", "deductionPoints": 2, "severity": "minor" },
+          { "description": "파일/함수 크기 초과 (300줄/50줄)", "deductionPoints": 2, "severity": "minor" },
+          { "description": "필수 테스트 누락", "deductionPoints": 3, "severity": "major" },
+          { "description": "순환 의존", "deductionPoints": 5, "severity": "major" }
+        ]
+      },
+      {
+        "name": "스펙 커버리지",
+        "maxScore": 100,
+        "criteria": [
+          { "description": "Phase 목표 기능 미구현", "deductionPoints": 8, "severity": "critical" },
+          { "description": "세부 시스템 항목 누락", "deductionPoints": 3, "severity": "minor" },
+          { "description": "Module ON/OFF no-op 폴백 누락", "deductionPoints": 5, "severity": "major" }
+        ]
+      }
+    ]
+  },
+  "severityGuide": {
+    "critical": "아키텍처/성능 근간 위반 (-8). 즉시 수정 필수.",
+    "major": "설계 원칙 위반 (-3~5). 수정 권장.",
+    "minor": "컨벤션/스타일 위반 (-1~2). 개선 권장."
   },
   "exceptionHandling": {
     "description": "예외 처리된 항목은 감점 대상에서 제외",

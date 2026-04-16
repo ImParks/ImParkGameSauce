@@ -1,0 +1,51 @@
+{
+  "description": "성능 및 데이터 관련 글로벌 규칙",
+  "rules": [
+    {
+      "id": "RULE-002",
+      "title": "Def 외부화",
+      "severity": "major",
+      "deductionPoints": 3,
+      "content": "하드코딩 밸런스 값 0개 (매직 넘버 금지). 모든 게임 오브젝트 타입에 대응 Def 파일 보유. 로드 시 필수 필드 누락 → 에러, 알 수 없는 필드 → 경고.",
+      "measurement": "소스 코드 내 수치 리터럴 검출, Def 커버리지율 산출"
+    },
+    {
+      "id": "RULE-003",
+      "title": "틱 예산",
+      "severity": "critical",
+      "deductionPoints": 8,
+      "content": "게임 틱 200ms(1배속), 로직 예산 20ms 이내. 폰당 AI 0.04ms(200폰 기준 8ms). 경로탐색 건당 0.5ms, 틱당 8건 상한. 3틱 연속 초과 시 critical 알림.",
+      "budgetAllocation": {
+        "pawnAI": { "ms": 8, "percent": 40 },
+        "pathfinding": { "ms": 4, "percent": 20 },
+        "needsMood": { "ms": 2, "percent": 10 },
+        "worldSim": { "ms": 2, "percent": 10 },
+        "events": { "ms": 1, "percent": 5 },
+        "buildingProduction": { "ms": 1, "percent": 5 },
+        "reserve": { "ms": 2, "percent": 10 }
+      },
+      "speedStrategy": {
+        "4x": "AI 시간분할(틱당 25% 풀평가, 긴급 폰 항상), 경로 캐시, 월드 2틱마다, 최소 30FPS"
+      },
+      "aiLOD": {
+        "LOD0": "화면 내+선택 → 매틱",
+        "LOD1": "화면 내+미선택 → 2틱",
+        "LOD2": "화면 밖+활동 → 5틱",
+        "LOD3": "화면 밖+대기 → 10틱"
+      },
+      "note": "Phase 1 벤치마크로 수치 확정 후 이 규칙 업데이트"
+    },
+    {
+      "id": "RULE-004",
+      "title": "직렬화",
+      "severity": "critical",
+      "deductionPoints": 8,
+      "content": "포맷: MessagePack(디버그 모드 JSON 병행). 파일: Header(8B)→Metadata→WorldState→CRC32. 마이그레이터 체인(vN→vN+1, 영구 보존). 컴포넌트 추가=기본값, 삭제=skip, 변경=마이그레이터 필수.",
+      "sizeTargets": {
+        "256map_200pawn": { "time": "3초", "size": "5MB" },
+        "512map_400pawn": { "time": "10초", "size": "20MB" }
+      },
+      "optimization": "기본값 생략(delta), 타일맵 RLE, zlib 압축, Def는 defId만 저장"
+    }
+  ]
+}

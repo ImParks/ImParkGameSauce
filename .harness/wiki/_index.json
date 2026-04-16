@@ -1,7 +1,19 @@
 {
   "version": "2.0.0",
   "description": "프로젝트 문서 위키 인덱스. 외부 API, 라이브러리, 사이트 이용규칙 등 모든 참조 문서를 파편화하여 관리합니다. 에이전트는 이 파일만 먼저 읽고, 필요한 문서의 하위만 선택적으로 조회합니다.",
-  "entries": [],
+  "entries": [
+    {
+      "id": "project-spec",
+      "type": "guide",
+      "name": "게임 설계 스펙 문서",
+      "provider": "내부",
+      "docSource": "프로젝트 내부 설계",
+      "lastSynced": "2026-04-16",
+      "status": "doc_only",
+      "path": "wiki/project-spec/",
+      "tags": ["game-design", "rimworld-like", "colony-sim", "2d-topdown", "singleplayer"]
+    }
+  ],
   "entrySchema": {
     "id": "고유 ID (예: stripe, react-query, my-site-policy)",
     "type": "api | library | site-policy | guide | other",

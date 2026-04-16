@@ -1,0 +1,12 @@
+{
+  "description": "게임 시스템 상세 스펙 목록. 에이전트는 필요한 시스템만 선택적으로 읽습니다.",
+  "systems": [
+    {"id": "pawn", "name": "폰 시스템", "path": "../pawn/", "summary": "스탯, 스킬, 특성, 기분, 신체 부위"},
+    {"id": "needs", "name": "니즈 시스템", "file": "needs.md", "summary": "음식/수면/레크리에이션/편안함/아름다움/약물"},
+    {"id": "construction", "name": "건설/공간 시스템", "file": "construction.md", "summary": "타일맵, 방 인식, 구역 시스템"},
+    {"id": "events", "name": "이벤트/스토리텔러", "file": "events.md", "summary": "이벤트 카테고리, MTB 확률, 레이드 포인트"},
+    {"id": "economy", "name": "생산/경제 시스템", "file": "economy.md", "summary": "자원 계층, 빌 큐, 품질 7단계"},
+    {"id": "difficulty", "name": "난이도 시스템", "file": "difficulty.md", "summary": "AI 스토리텔러 3종, 동적 난이도 조절"},
+    {"id": "tech-requirements", "name": "기술 스택 요구사항", "file": "tech-requirements.md", "summary": "렌더링/연산/데이터/플랫폼 요구사항"}
+  ]
+}

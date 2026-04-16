@@ -1,0 +1,10 @@
+{
+  "description": "폰 시스템 하위 문서 목록",
+  "sections": [
+    {"id": "stats", "name": "스탯 구조", "file": "stats.md", "summary": "신체 능력 6종 + 주요 스탯, 최종 스탯 = (기본값+Σ오프셋)×Π계수"},
+    {"id": "skills", "name": "스킬 시스템", "file": "skills.md", "summary": "12종 스킬, 레벨 0~20, 열정 시스템, 감쇠"},
+    {"id": "traits", "name": "특성 시스템", "file": "traits.md", "summary": "1~3개/폰, 스펙트럼 구조, statOffsets/statFactors/disabledWorkTags"},
+    {"id": "mood", "name": "기분/정신 붕괴", "file": "mood.md", "summary": "사고 누적, 정신 붕괴 3단계 (경미/중대/극단)"},
+    {"id": "body", "name": "신체 부위", "file": "body.md", "summary": "계층 트리, 부위별 HP/출혈/통증, 인공 신체 4티어"}
+  ]
+}

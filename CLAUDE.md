@@ -164,6 +164,23 @@
 5. `.env.example`에 환경변수 추가
 6. 가능하면 라이브 검증 실행하여 스냅샷 저장
 
+## 개발 환경: 클라우드 + 로컬 분리
+
+### 역할 분리
+| 환경 | 역할 | 환경변수 |
+|------|------|---------|
+| **클라우드 (Claude Code 웹)** | 코드 작성, 설계, git 관리 | 대부분 불필요 (필요시 export로 임시 설정) |
+| **로컬 PC** | git pull → 실행, 테스트, 브라우저 확인 | `.env` + `.claude/settings.local.json` (영구 보존) |
+
+### 워크플로우
+```
+클라우드: 코드 작성 → git push
+                         │
+                       GitHub
+                         │
+로컬 PC: git pull → .env(이미 세팅됨) → npm start → 테스트
+```
+
 ## Bootstrap: 초기 부트스트랩
 
 프로젝트 첫 실행 시 또는 `.harness/config.json`의 `bootstrapped`가 `false`인 경우:

@@ -136,7 +136,7 @@
 | 파일 | 용도 | Git 포함 |
 |------|------|:--------:|
 | `.env` | 로컬 서버 실행용 (dotenv로 로드) | X (gitignore) |
-| `~/.zshrc` | MCP 서버용 (`export KEY=VALUE`) | 해당없음 (홈 디렉토리) |
+| `.claude/settings.local.json` | MCP 서버용 (env 필드에 키 설정) | X (gitignore) |
 | `.env.example` | 필요한 환경변수 목록 템플릿 (값 없음) | O |
 
 #### 새 키 추가 시 절차
@@ -145,7 +145,7 @@
 2. _keymap.json의 keys 배열에 메타데이터 등록
 3. 사용자에게 안내:
    - .env에 실제 값 추가 (로컬 서버용)
-   - ~/.zshrc에 export 추가 (MCP용)
+   - .claude/settings.local.json의 env에 실제 값 추가 (MCP용)
 ```
 
 #### 보안 규칙

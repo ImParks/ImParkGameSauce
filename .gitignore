@@ -24,10 +24,12 @@ hs_err_pid*
 replay_pid*
 
 # Environment variables (secrets)
-# .env: 로컬 서버 실행용 키 저장 (MCP용은 ~/.zshrc에 별도 관리)
+# .env: 로컬 서버 실행용
+# .claude/settings.local.json: MCP 서버용
 .env
 .env.local
 .env.*.local
+.claude/settings.local.json
 
 # Harness secrets (actual key values should never be committed)
 .harness/secrets/*.key

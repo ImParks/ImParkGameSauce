@@ -12,18 +12,36 @@
     },
     {
       "id": "RULE-005",
-      "title": "레이어 방향",
+      "title": "레이어 방향 (DDD)",
       "severity": "critical",
       "deductionPoints": 8,
-      "content": "Core → Data → Logic → Presentation 방향만 허용. 역방향 의존 0건, 순환 의존 0건.",
+      "content": "DDD 레이어 의존 방향: Presentation → Application → Domain ← Infrastructure. Domain 레이어는 가장 안쪽으로 외부 프레임워크 의존 0건. 역방향 의존 0건, 순환 의존 0건.",
+      "layers": {
+        "domain": "순수 비즈니스 로직. 외부 의존 없음. 다른 레이어를 import하지 않는다.",
+        "application": "domain만 import 가능. ECS System(유즈케이스) 위치.",
+        "infrastructure": "domain의 인터페이스를 구현. domain + shared만 import 가능.",
+        "presentation": "application만 호출. domain 직접 접근 금지.",
+        "shared": "모든 레이어에서 import 가능. shared는 다른 도메인을 import하지 않는다."
+      },
+      "crossDomain": "도메인 간 직접 import 금지. 이벤트 버스 또는 shared 인터페이스를 통해서만 통신 (RULE-007 준수).",
       "measurement": "import 분석 도구로 의존성 그래프 생성, CI 자동 검증"
     },
     {
       "id": "RULE-006",
-      "title": "경로 분리",
+      "title": "경로 분리 (DDD 구조)",
       "severity": "minor",
       "deductionPoints": 2,
-      "content": "디렉토리: src/core, src/systems, src/components, src/modules, src/ui, src/save, data/defs, data/mods. 단일 파일 300줄, 단일 함수 50줄 제한."
+      "content": "DDD Bounded Context별 폴더 + 내부 레이어 구조. 단일 파일 300줄, 단일 함수 50줄 제한.",
+      "structure": {
+        "src/shared/": "Shared Kernel (공용 타입, 유틸, ECS 프레임워크, 이벤트 버스, Def 로더)",
+        "src/{domain}/domain/": "도메인 레이어 (components, rules, events)",
+        "src/{domain}/application/": "애플리케이션 레이어 (ECS Systems)",
+        "src/{domain}/infrastructure/": "인프라 레이어 (직렬화, Def 파싱, 필요 시)",
+        "src/ui/": "프레젠테이션 레이어 (전체 UI)",
+        "data/defs/": "Def JSON 데이터",
+        "data/mods/": "모드 디렉토리"
+      },
+      "domains": ["pawn", "building", "economy", "event", "environment"]
     },
     {
       "id": "RULE-007",

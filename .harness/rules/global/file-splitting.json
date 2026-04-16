@@ -1,0 +1,61 @@
+{
+  "description": "파일 분할 규칙 - 코드/문서/설정 3개 영역별 규칙",
+  "rules": [
+    {
+      "id": "RULE-012",
+      "title": "파일 분할 - 공통 원칙",
+      "severity": "minor",
+      "deductionPoints": 2,
+      "content": "모든 파일의 1차 분할 기준은 '의미/책임 단위'이며, 줄 수는 안전망이다. 분할된 폴더에는 반드시 인덱스 파일(_index.json 또는 index.ts)을 둔다. 에이전트는 폴더 진입 시 항상 인덱스부터 읽고 필요한 파일만 선택 조회한다.",
+      "indexRule": {
+        "format": "_index.json (문서/설정) 또는 index.ts (코드)",
+        "required": "파일 분할 시 항상 필수",
+        "content": "각 파일의 역할을 최대 3줄로 요약하여 에이전트가 빠르게 필요 파일을 식별",
+        "agentBehavior": "폴더 진입 → _index.json 먼저 읽기 → 필요한 파일만 선택 로드 → 전체 로드 금지"
+      }
+    },
+    {
+      "id": "RULE-012A",
+      "title": "파일 분할 - 소스 코드",
+      "severity": "minor",
+      "deductionPoints": 2,
+      "content": "소스 코드 분할은 단일 책임(SRP) 기준. 300줄 초과 시 분할 필수, 300줄 미만이라도 관심사 혼재/변경 빈도 차이 시 즉시 분할.",
+      "splitPattern": {
+        "system": "폴더 승격 + SubSystem 패턴. 예: NeedsSystem.ts → needs/ (index.ts + HungerSubSystem.ts + RestSubSystem.ts + NeedsSystem.ts 오케스트레이터)",
+        "component": "항상 함께 부착되는 컴포넌트는 1파일(최대 3개). 독립 부착 가능한 컴포넌트는 별도 파일.",
+        "defType": "카테고리별 파일. 길어지면 base + extensions 분리.",
+        "test": "소스 분할을 따라감. 오케스트레이터(통합) + 서브시스템(단위) 분리."
+      },
+      "barrel": "폴더 승격 시 index.ts 필수. re-export만 허용, export * 금지. 외부는 배럴을 통해서만 import.",
+      "noSplit": "상태 기계(전이 테이블), 순수 타입 정의(500줄까지), 테스트(소스 1:1)"
+    },
+    {
+      "id": "RULE-012B",
+      "title": "파일 분할 - 하네스 문서",
+      "severity": "minor",
+      "deductionPoints": 2,
+      "content": "문서 분할은 의미 단위(시스템/역할) 기준. 150줄 초과 시 분할 검토, 300줄 초과 시 필수. 최대 2레벨 깊이.",
+      "splitPattern": {
+        "spec": "시스템별 1파일 기본. 150줄 초과 시 하위 폴더 승격. 예: needs.md → needs/_index.json + food.md + sleep.md",
+        "plan": "역할/관심사 단위 분할. 예: bootstrap-plan/ (agents.md, rules.md, phases.md)",
+        "feedbackLog": "평가 세션별 1파일. 50개 초과 시에만 _index.json 생성.",
+        "image": ".harness/ 내 이미지/바이너리 저장 금지. docs/에 저장 후 경로 참조."
+      },
+      "noSplit": "config.json, agents.json, evaluation-criteria.json, */_index.json, overview.md (항상 전체 로드 파일)"
+    },
+    {
+      "id": "RULE-012C",
+      "title": "파일 분할 - 규칙/설정/Def 데이터",
+      "severity": "minor",
+      "deductionPoints": 2,
+      "content": "규칙은 도메인별 묶음 유지, 15규칙 또는 200줄 초과 시 세분화. Def 데이터는 카테고리별 묶음, 50 Def 또는 500줄 초과 시 서브 카테고리 분할.",
+      "splitPattern": {
+        "rules": "도메인 세분화. 예: architecture.json → architecture-ecs.json + architecture-layers.json. _index.json location 업데이트.",
+        "defData": "카테고리별 1파일 기본. 예: weapons.def.json (30개 이하). 50 Def 초과 시: weapons-melee.def.json + weapons-ranged.def.json. 카테고리당 20파일 상한.",
+        "settings": "agents.json은 15 에이전트까지 단일 유지. 초과 시 역할별 분할."
+      },
+      "indexScaling": "규칙 100개 초과 시 2단계 인덱스 도입. 루트 _index.json → 폴더별 _index.json",
+      "jsonVsFolder": "500줄 초과 또는 독립 로드 패턴 → 파일 분할. 500줄 이하 + 전체 로드 → JSON 내부 구조화 유지."
+    }
+  ]
+}

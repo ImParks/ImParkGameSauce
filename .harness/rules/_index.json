@@ -12,7 +12,11 @@
     { "id": "RULE-008", "title": "Def-Entity 매핑", "location": "global/architecture.json", "tags": ["def", "ecs", "mapping"], "severity": "major", "createdAt": "2026-04-16", "createdFrom": "bootstrap_discussion", "active": true },
     { "id": "RULE-009", "title": "모듈 ON/OFF", "location": "global/architecture.json", "tags": ["module", "interface"], "severity": "critical", "createdAt": "2026-04-16", "createdFrom": "bootstrap_discussion", "active": true },
     { "id": "RULE-010", "title": "네이밍 컨벤션", "location": "global/conventions.json", "tags": ["naming", "convention"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "bootstrap_discussion", "active": true },
-    { "id": "RULE-011", "title": "테스트", "location": "global/conventions.json", "tags": ["test", "quality"], "severity": "major", "createdAt": "2026-04-16", "createdFrom": "bootstrap_discussion", "active": true }
+    { "id": "RULE-011", "title": "테스트", "location": "global/conventions.json", "tags": ["test", "quality"], "severity": "major", "createdAt": "2026-04-16", "createdFrom": "bootstrap_discussion", "active": true },
+    { "id": "RULE-012", "title": "파일 분할 - 공통 원칙", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "index"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
+    { "id": "RULE-012A", "title": "파일 분할 - 소스 코드", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "code"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
+    { "id": "RULE-012B", "title": "파일 분할 - 하네스 문서", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "docs"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
+    { "id": "RULE-012C", "title": "파일 분할 - 규칙/설정/Def 데이터", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "config", "def"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true }
   ],
   "ruleSchema": {
     "id": "규칙 고유 ID",

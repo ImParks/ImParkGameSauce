@@ -73,6 +73,62 @@
 ```
 이 정보를 평가 에이전트에 함께 전달하여 감점 대상에서 제외할 수 있습니다.
 
+## Wiki System: 외부 API 문서 관리
+
+### 문서 파편화 원칙
+외부 API 문서는 컨텍스트 절약을 위해 계층적으로 파편화하여 저장합니다.
+**절대로 API 문서 전체를 한 번에 로드하지 않습니다.**
+
+### 문서 구조 (API 1개당)
+```
+.harness/wiki/{api-id}/
+├── overview.md              # API 개요, 인증, 공통사항 (먼저 이것만 읽음)
+├── endpoints/
+│   ├── _index.json          # 엔드포인트 목록 (필요한 것만 선택)
+│   ├── create-payment.md    # 개별 엔드포인트 상세
+│   └── ...
+├── schemas/
+│   ├── _index.json          # 데이터 구조체 목록
+│   ├── payment-object.json  # 개별 스키마 정의
+│   └── ...
+└── snapshots/
+    ├── _index.json          # 라이브 호출 결과 목록
+    └── {snapshot-file}.json # 실제 API 응답 스냅샷
+```
+
+### 에이전트의 문서 조회 순서
+1. `wiki/_index.json` → 어떤 API가 등록되어 있는지 확인
+2. `wiki/{api-id}/overview.md` → API 개요만 읽음 (여기서 대부분 충분)
+3. `wiki/{api-id}/endpoints/_index.json` → 필요한 엔드포인트 식별
+4. `wiki/{api-id}/endpoints/{endpoint}.md` → **필요한 엔드포인트만** 읽음
+5. `wiki/{api-id}/snapshots/` → 문서 vs 실제 응답 차이 확인
+
+### 라이브 API 검증
+공식 문서는 종종 실제 API와 다릅니다. 다음 방법으로 검증합니다:
+1. **MCP 호출**: MCP 서버를 통해 API를 직접 호출
+2. **코드 실행**: 에이전트가 테스트 코드를 작성·실행하여 실제 응답 구조 확인
+3. **스냅샷 저장**: 호출 결과를 `snapshots/`에 저장 (키 값은 반드시 마스킹)
+4. **문서 대조**: 스냅샷과 문서를 비교하여 차이점을 `docComparison`에 기록
+5. **차이 발견 시**: 해당 엔드포인트 문서에 "라이브 검증" 섹션을 업데이트
+
+### 시크릿/키 관리
+- **실제 키 값은 어디에도 저장하지 않습니다** (wiki, rules, feedback-log 모두 포함)
+- `.harness/secrets/_keymap.json`: 환경변수명만 매핑 (실제 키 없음)
+- `.env`: 실제 키 저장 (.gitignore에 의해 커밋 제외)
+- `.env.example`: 필요한 환경변수 목록 템플릿 (커밋 대상)
+- 키 참조 시: `${SECRET_REF_NAME}` 형식으로 환경변수명만 표기
+- 스냅샷 저장 시: `sk-****1234` 형태로 마스킹
+- 환경변수에 키가 없으면: **사용자에게 설정을 요청하고 절대 임의 값을 사용하지 않음**
+
+### 새 API 문서 등록 절차
+사용자가 공식 문서를 제공하면:
+1. `wiki/{api-id}/` 폴더를 `_api-template/` 기반으로 생성
+2. 문서를 파편화하여 overview, endpoints, schemas로 분리
+3. `wiki/_index.json`에 API 메타데이터 등록
+4. `secrets/_keymap.json`에 키 매핑 추가
+5. `.env.example`에 환경변수 추가
+6. 가능하면 라이브 검증 실행하여 스냅샷 저장
+
 ## Bootstrap: 초기 부트스트랩
 
 프로젝트 첫 실행 시 또는 `.harness/config.json`의 `bootstrapped`가 `false`인 경우:

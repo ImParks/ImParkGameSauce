@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "description": "외부 API 문서 위키 인덱스. 에이전트는 이 파일만 먼저 읽고, 필요한 API의 하위 문서만 선택적으로 조회합니다.",
+  "apis": [],
+  "apiSchema": {
+    "id": "api-고유-id (예: stripe, kakao-pay, firebase-auth)",
+    "name": "API 표시명",
+    "provider": "제공사",
+    "baseUrl": "API 기본 URL",
+    "authMethod": "bearer | api_key | oauth2 | basic",
+    "secretRef": "secrets/_keymap.json의 키 참조명",
+    "docSource": "원본 공식 문서 URL",
+    "lastSynced": "문서를 마지막으로 긁어온 날짜",
+    "lastVerified": "라이브 API로 마지막 검증한 날짜",
+    "status": "verified | doc_only | outdated | deprecated",
+    "path": "wiki/{api-id}/",
+    "endpointCount": 0,
+    "tags": ["관련 태그"]
+  },
+  "lookupGuide": {
+    "step1": "이 _index.json에서 필요한 API id를 찾는다",
+    "step2": "wiki/{api-id}/overview.md → API 개요, 인증방식, 공통사항만 읽는다",
+    "step3": "wiki/{api-id}/endpoints/_index.json → 엔드포인트 목록만 읽는다",
+    "step4": "필요한 엔드포인트 파일만 선택적으로 읽는다 (전체를 읽지 않는다)",
+    "step5": "wiki/{api-id}/snapshots/ → 실제 API 호출 결과가 있으면 문서와 대조한다",
+    "important": "컨텍스트 절약을 위해 반드시 필요한 파일만 읽을 것. 전체 로드 금지."
+  }
+}

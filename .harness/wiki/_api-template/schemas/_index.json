@@ -1,0 +1,12 @@
+{
+  "description": "이 API에서 사용되는 데이터 구조체(스키마) 목록. 여러 엔드포인트에서 공통으로 사용되는 구조체를 정의합니다.",
+  "schemas": [],
+  "schemaEntry": {
+    "id": "스키마 고유 ID (예: payment-object)",
+    "name": "표시명 (예: Payment Object)",
+    "file": "payment-object.json",
+    "usedBy": ["해당 스키마를 사용하는 엔드포인트 ID 목록"],
+    "source": "doc | live_verified",
+    "lastVerified": null
+  }
+}

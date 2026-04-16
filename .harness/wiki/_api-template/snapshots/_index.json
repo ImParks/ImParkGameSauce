@@ -1,0 +1,34 @@
+{
+  "description": "라이브 API 호출 결과 스냅샷. 문서와 실제 응답을 대조하여 불일치를 발견하는 데 사용됩니다.",
+  "snapshots": [],
+  "snapshotSchema": {
+    "id": "snapshot-YYYYMMDD-HHMMSS-엔드포인트id",
+    "endpointId": "호출한 엔드포인트 ID",
+    "method": "호출 방식 (mcp | code | curl)",
+    "timestamp": "ISO 8601",
+    "request": {
+      "url": "실제 호출 URL",
+      "method": "HTTP 메서드",
+      "headers": "전송한 헤더 (시크릿 마스킹)",
+      "body": "전송한 바디"
+    },
+    "response": {
+      "status": 200,
+      "headers": "응답 헤더",
+      "body": "실제 응답 바디"
+    },
+    "docComparison": {
+      "matches": true,
+      "differences": [
+        {
+          "field": "차이가 있는 필드",
+          "docSays": "문서에 명시된 내용",
+          "actualResponse": "실제 응답 내용",
+          "severity": "breaking | minor | cosmetic"
+        }
+      ]
+    },
+    "file": "스냅샷 상세 파일명"
+  },
+  "important": "스냅샷에 API 키나 시크릿 값이 포함되지 않도록 반드시 마스킹할 것"
+}

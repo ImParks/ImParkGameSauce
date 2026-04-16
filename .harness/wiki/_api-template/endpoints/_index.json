@@ -1,0 +1,14 @@
+{
+  "description": "이 API의 전체 엔드포인트 목록. 에이전트는 여기서 필요한 엔드포인트만 찾아서 개별 파일을 읽습니다.",
+  "endpoints": [],
+  "endpointSchema": {
+    "id": "엔드포인트 고유 ID (예: create-payment)",
+    "method": "GET | POST | PUT | DELETE | PATCH",
+    "path": "/api/v1/payments",
+    "summary": "한 줄 요약",
+    "tags": ["payment", "transaction"],
+    "file": "create-payment.md",
+    "hasSnapshot": false,
+    "snapshotDate": null
+  }
+}

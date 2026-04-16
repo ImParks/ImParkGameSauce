@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "decidedAt": "2026-04-16",
+  "decidedBy": "discovery_discussion (3 agents) + user_approval",
+  "decisions": {
+    "engine": {
+      "choice": "커스텀 (풀 엔진 미사용)",
+      "framework": "MonoGame",
+      "reason": "렌더링/입력/오디오만 프레임워크에 위임, 나머지 직접 구현. Stardew Valley 검증 사례."
+    },
+    "language": {
+      "choice": "C#",
+      "version": ".NET 8+",
+      "reason": "DDD+ECS 표현력 최고 (인터페이스, 제네릭, 리플렉션), 1~3인 팀 생산성, 림월드 선례."
+    },
+    "aiArchitecture": {
+      "choice": "Behavior Tree (BT)",
+      "reason": "C# 클래스 상속 + 델리게이트로 깔끔한 표현. 림월드의 ThinkTree와 동일 패턴. GOAP/HTN 대비 디버깅 용이."
+    },
+    "pathfinding": {
+      "choice": "A* 직접 구현 + 리전 시스템",
+      "reason": "타일 기반 맵에 최적. 리전 시스템으로 대규모 맵 성능 확보. 외부 라이브러리 의존 최소화."
+    },
+    "defFormat": {
+      "choice": "JSON",
+      "parser": "System.Text.Json",
+      "reason": "리플렉션 기반 타입 안전 로딩, 모딩 친화적 (사람이 읽기 쉬움), JSON5 확장 가능."
+    },
+    "serialization": {
+      "choice": "MessagePack",
+      "library": "MessagePack-CSharp",
+      "fallback": "System.Text.Json (디버그 모드)",
+      "reason": ".NET 생태계 최고 성숙도. JSON 대비 30-50% 크기 절감, 빠른 직렬화/역직렬화."
+    },
+    "modding": {
+      "choice": "AssemblyLoadContext + Def 패치/오버라이드",
+      "reason": "C# 어셈블리 동적 로딩으로 런타임 모드 코드 로드 가능. Def JSON 패치로 데이터 모딩."
+    }
+  },
+  "evaluationSummary": {
+    "candidates": ["C# + MonoGame", "Rust + macroquad", "C++ + SDL2", "TypeScript + PixiJS"],
+    "scores": {
+      "C# + MonoGame": { "performance": "35/47 (74%)", "productivity": "62/70 (89%)", "gameSystems": "53/60 (88%)" },
+      "Rust + macroquad": { "performance": "47/47 (100%)", "productivity": "41/70 (59%)", "gameSystems": "41/60 (68%)" },
+      "C++ + SDL2": { "performance": "44/47 (94%)", "productivity": "41/70 (59%)", "gameSystems": "41/60 (68%)" },
+      "TypeScript + PixiJS": { "performance": "25/47 (53%)", "productivity": "58/70 (83%)", "gameSystems": "44/60 (73%)" }
+    },
+    "result": "C# + MonoGame (2:1 다수결, 생산성+게임시스템 우위)"
+  }
+}

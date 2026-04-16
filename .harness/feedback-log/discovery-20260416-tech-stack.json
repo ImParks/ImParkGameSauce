@@ -1,0 +1,11 @@
+{
+  "id": "discovery-20260416-tech-stack",
+  "stage": "discovery",
+  "timestamp": "2026-04-16T00:00:00Z",
+  "topic": "Phase 0 기술 스택 결정",
+  "agents": ["엔진/성능 관점", "개발 생산성 관점", "게임시스템 관점"],
+  "candidates": ["C# + MonoGame", "Rust + macroquad", "C++ + SDL2", "TypeScript + PixiJS"],
+  "result": "C# + MonoGame",
+  "userDecision": "우세한 방향으로 (C# + MonoGame 2:1 다수결)",
+  "detailsRef": ".harness/tech-stack-decision.json"
+}

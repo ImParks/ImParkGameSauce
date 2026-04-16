@@ -14,7 +14,7 @@
         "event": "PawnDiedEvent",
         "interface": "IGameModule",
         "defData": "human.def.json",
-        "test": "HealthComponent.test.ts"
+        "test": "HealthComponent.test.cs"
       }
     },
     {
@@ -22,7 +22,7 @@
       "title": "테스트",
       "severity": "major",
       "deductionPoints": 3,
-      "content": "필수 테스트: ECS 컴포넌트, 시스템 핵심 로직, Def 로더, 이벤트 버스, 경로탐색, 세이브 round-trip. 커버리지: Core 80%, Module 60%. 성능: 틱 벤치마크 CI 회귀 감지. 파일 위치: 소스와 동일 디렉토리(.test.ts).",
+      "content": "필수 테스트: ECS 컴포넌트, 시스템 핵심 로직, Def 로더, 이벤트 버스, 경로탐색, 세이브 round-trip. 커버리지: Core 80%, Module 60%. 성능: 틱 벤치마크 CI 회귀 감지. 파일 위치: 소스와 동일 디렉토리(.test.cs).",
       "testTypes": {
         "unit": "시스템/컴포넌트 단위, 외부 의존성 모킹",
         "integration": "이벤트 버스를 통한 크로스 시스템 흐름",

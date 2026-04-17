@@ -1,0 +1,9 @@
+{
+  "id": "plan-approval-20260417-phase1",
+  "stage": "plan_report",
+  "timestamp": "2026-04-17T00:00:00Z",
+  "planRef": "plan-eval-20260417-phase1-loop1.json",
+  "approved": true,
+  "userMessage": "승인",
+  "scope": "Phase 1 엔진 코어 전체 (Scaffold + 1A~1G). 평가 개선 제안 4건 포함 반영."
+}

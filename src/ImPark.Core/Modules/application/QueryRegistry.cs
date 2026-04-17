@@ -54,13 +54,13 @@ public sealed class QueryRegistry : IQueryRegistry
         fallbacks[typeof(TQuery)] = fallback;
     }
 
-    // Used by ModuleRegistry when a module disables to revert its query to fallback (RULE-009)
-    internal bool Unregister<TQuery>() where TQuery : class
+    // Used when a module disables to revert its query to fallback (RULE-009)
+    public bool Unregister<TQuery>() where TQuery : class
     {
         return implementations.Remove(typeof(TQuery));
     }
 
-    internal bool Unregister(Type queryType)
+    public bool Unregister(Type queryType)
     {
         return implementations.Remove(queryType);
     }

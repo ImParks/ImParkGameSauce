@@ -16,7 +16,8 @@
     { "id": "RULE-012", "title": "파일 분할 - 공통 원칙", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "index"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
     { "id": "RULE-012A", "title": "파일 분할 - 소스 코드", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "code"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
     { "id": "RULE-012B", "title": "파일 분할 - 하네스 문서", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "docs"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
-    { "id": "RULE-012C", "title": "파일 분할 - 규칙/설정/Def 데이터", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "config", "def"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true }
+    { "id": "RULE-012C", "title": "파일 분할 - 규칙/설정/Def 데이터", "location": "global/file-splitting.json", "tags": ["structure", "file", "split", "config", "def"], "severity": "minor", "createdAt": "2026-04-16", "createdFrom": "discovery_discussion", "active": true },
+    { "id": "RULE-013", "title": "워크플로우 준수", "location": "global/workflow.json", "tags": ["workflow", "process", "approval"], "featureDomains": ["workflow", "process"], "severity": "critical", "createdAt": "2026-04-16", "createdFrom": "workflow_violation_learning", "active": true }
   ],
   "ruleSchema": {
     "id": "규칙 고유 ID",

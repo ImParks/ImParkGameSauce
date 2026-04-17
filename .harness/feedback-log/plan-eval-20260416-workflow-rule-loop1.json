@@ -1,0 +1,21 @@
+{
+  "evaluationId": "plan-eval-20260416-workflow-rule-loop1",
+  "stage": "plan_evaluation",
+  "timestamp": "2026-04-17T00:00:00Z",
+  "task": "RULE-013 워크플로우 준수 + 훅 시스템",
+  "overallScore": 96,
+  "outcome": "passed",
+  "categories": [
+    { "name": "에이전트 구성 적합성", "maxWeight": 25, "score": 25, "deductions": [] },
+    { "name": "스펙 충족도", "maxWeight": 25, "score": 24, "deductions": [{ "reason": "_index.json 메타데이터에 featureDomains 필드 누락", "points": 1 }] },
+    { "name": "실현 가능성", "maxWeight": 20, "score": 19, "deductions": [{ "reason": "사용자 승인 검증이 대화 기반으로 비구조적", "points": 1 }] },
+    { "name": "확장성/유연성", "maxWeight": 15, "score": 15, "deductions": [] },
+    { "name": "규칙 완성도", "maxWeight": 15, "score": 13, "deductions": [{ "reason": "feedback-log 파일명 컨벤션이 공식 정의되지 않음", "points": 2 }] }
+  ],
+  "summary": "워크플로우 위반 방지 목표를 잘 달성하며 기존 하네스 시스템과의 일관성이 우수함. 경미한 보완 사항 3건 있으나 설계 근간에 영향 없음.",
+  "improvements": [
+    "feedback-log 파일명 컨벤션을 config.json에 공식 정의",
+    "_index.json 메타데이터에 featureDomains: [workflow, process] 추가",
+    "사용자 승인을 feedback-log에도 기록하는 구조적 방안 병행"
+  ]
+}

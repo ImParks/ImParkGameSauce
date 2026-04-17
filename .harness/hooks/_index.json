@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "워크플로우 훅 인덱스. 단계 전환 시 에이전트가 조건을 검증하거나 후속 작업을 트리거합니다.",
+  "hooks": [
+    {
+      "id": "HOOK-001",
+      "trigger": "pre-implementation",
+      "location": "pre-implementation.json",
+      "summary": "구현 시작 전 계획 평가 통과 및 사용자 승인 확인"
+    },
+    {
+      "id": "HOOK-002",
+      "trigger": "post-implementation",
+      "location": "post-implementation.json",
+      "summary": "구현 완료 후 평가 에이전트 자동 트리거 및 피드백 기록"
+    }
+  ],
+  "hookSchema": {
+    "id": "훅 고유 ID (HOOK-NNN)",
+    "trigger": "트리거 이름 (pre-implementation, post-implementation 등)",
+    "stage": "연관된 워크플로우 단계 (config.json.stages 중 하나)",
+    "when": "before | after",
+    "conditions": "검증 조건 배열 (pre 훅)",
+    "actions": "실행 동작 배열 (post 훅)",
+    "onFail": "block | escalate_to_user | warn"
+  },
+  "lookupGuide": {
+    "step1": "_index.json에서 trigger로 매칭되는 훅 위치 확인",
+    "step2": "해당 훅 JSON 파일 로드하여 conditions 또는 actions 실행",
+    "step3": "onFail 정책에 따라 실패 처리"
+  }
+}

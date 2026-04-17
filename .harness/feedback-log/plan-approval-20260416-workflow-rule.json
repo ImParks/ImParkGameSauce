@@ -1,0 +1,9 @@
+{
+  "id": "plan-approval-20260416-workflow-rule",
+  "stage": "plan_report",
+  "timestamp": "2026-04-17T00:00:00Z",
+  "planRef": "plan-eval-20260416-workflow-rule-loop1.json",
+  "approved": true,
+  "userMessage": "계획대로 구현하고 평가 개선안도 구현해",
+  "scope": "RULE-013 워크플로우 준수 신설 + 훅 시스템(.harness/hooks/) 신설 + config.json(hooks, feedbackLog 섹션) + rules/_index.json(RULE-013 등록). 평가 개선안 3건 포함."
+}

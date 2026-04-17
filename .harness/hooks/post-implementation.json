@@ -1,0 +1,30 @@
+{
+  "id": "HOOK-002",
+  "trigger": "post-implementation",
+  "stage": "implementation",
+  "when": "after",
+  "description": "구현 완료 후 평가 에이전트를 자동으로 호출하고 결과를 feedback-log에 기록한다.",
+  "actions": [
+    {
+      "id": "action-trigger-eval",
+      "type": "trigger-agent",
+      "description": "평가 에이전트 자동 트리거",
+      "agentRole": "evaluator",
+      "targetStage": "implementation_evaluation",
+      "input": {
+        "feedbackLogPrefix": "impl-eval-",
+        "feedbackLogPrefixRef": "config.feedbackLog.namingConvention.implEvaluation",
+        "maxLoops": "config.workflow.maxFeedbackLoops"
+      }
+    },
+    {
+      "id": "action-log-result",
+      "type": "log-feedback",
+      "description": "평가 결과를 feedback-log에 기록",
+      "outputPattern": "feedback-log/impl-eval-{date}-{task}-loop{n}.json",
+      "outputPatternRef": "config.feedbackLog.namingConvention.implEvaluation"
+    }
+  ],
+  "onFail": "escalate_to_user",
+  "failMessage": "평가 에이전트 호출 실패 -- 사용자에게 에스컬레이션"
+}

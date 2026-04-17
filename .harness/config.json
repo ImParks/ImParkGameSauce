@@ -1,6 +1,6 @@
 {
   "bootstrapped": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "workflow": {
     "passScore": 95,
     "maxScore": 100,
@@ -27,6 +27,31 @@
     "by-feature",
     "by-agent"
   ],
+  "hooks": {
+    "enabled": true,
+    "directory": ".harness/hooks/",
+    "indexFile": "_index.json",
+    "description": "워크플로우 단계 전환 시 에이전트가 참조하는 선언적 훅. 자세한 내용은 hooks/_index.json 참조"
+  },
+  "feedbackLog": {
+    "directory": ".harness/feedback-log/",
+    "namingConvention": {
+      "discovery": "discovery-{date}-{topic}.json",
+      "planEvaluation": "plan-eval-{date}-{task}-loop{n}.json",
+      "planApproval": "plan-approval-{date}-{task}.json",
+      "implEvaluation": "impl-eval-{date}-{task}-loop{n}.json"
+    },
+    "namingConventionNote": "{date}=YYYYMMDD, {task}=kebab-case 작업명, {n}=피드백 루프 회차(1부터). 훅의 lookupPattern이 이 컨벤션을 참조함.",
+    "planApprovalSchema": {
+      "id": "plan-approval-{date}-{task}",
+      "stage": "plan_report",
+      "timestamp": "ISO8601",
+      "planRef": "관련 plan-eval 파일",
+      "approved": "true|false",
+      "userMessage": "승인 메시지 원문 (대화에서 발췌)",
+      "scope": "승인된 작업 범위 요약"
+    }
+  },
   "learning": {
     "autoCreateRuleOnDeduction": true,
     "autoCreateRuleNote": "평가에서 감점 발생 시 자동으로 방지 규칙 생성",

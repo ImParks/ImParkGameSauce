@@ -1,0 +1,17 @@
+{
+  "evaluationId": "plan-eval-20260417-phase2-loop2",
+  "stage": "plan_evaluation",
+  "timestamp": "2026-04-17T07:30:00Z",
+  "task": "Phase 2 폰 + AI + 경로탐색",
+  "overallScore": 96.4,
+  "outcome": "passed",
+  "summary": "Loop 1 감점 8건 전부 해소. BT 직렬화 전략(ThinkTreeDefId+CurrentNodeIndex+Blackboard 화이트리스트), cancel-on-save Job 정책, 이벤트 sync/async 전수, medical OFF no-op, 자동 해제 통합 테스트, BenchmarkDotNet baseline+5% 회귀, 모딩 훅 예시, Thoughts delta 모두 반영.",
+  "improvements": [
+    "IJobGiver Phase 2 stub 동작 명시",
+    "Phase 2 미지원 need 타입 리스트",
+    "pawn.died 구독자 순서 규칙",
+    "medical OFF→ON 세이브 마이그레이션",
+    "Pawn Components delta 기준",
+    "BT CurrentNodeIndex 인코딩"
+  ]
+}

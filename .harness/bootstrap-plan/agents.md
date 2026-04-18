@@ -12,6 +12,10 @@
 | ui-data | UI/데이터 | UI, 세이브/로드 | 모딩 |
 | evaluator | 평가 | - | - |
 
+## Phase 1B 담당 근거: ui-data
+
+ui-data는 데이터 스키마, 로딩 파이프라인, 패치/오버라이드에 특화되어 있으므로 Def 로더 및 모드 파이프라인을 전담한다. core-engine은 IDefDatabase 인터페이스를 정의하고, ui-data가 DefDatabase 구현체 + DefLoader + ModDiscovery + PatchApplier를 제공하는 구조. 이를 통해 core-engine은 Def 구현에 의존하지 않고 NullDefDatabase 스텁으로 독립 테스트 가능.
+
 ## Module 8개 전수 매핑
 
 | Module | 담당 에이전트 | Phase | 선행 의존 |

@@ -1,0 +1,18 @@
+{
+  "evaluationId": "impl-eval-20260417-phase1-loop1",
+  "stage": "implementation_evaluation",
+  "timestamp": "2026-04-17T06:00:00Z",
+  "task": "Phase 1 엔진 코어",
+  "overallScore": 95,
+  "outcome": "passed",
+  "categories": [
+    { "name": "아키텍처", "maxWeight": 35, "score": 35, "deductions": [] },
+    { "name": "성능", "maxWeight": 15, "score": 15, "deductions": [] },
+    { "name": "데이터 외부화", "maxWeight": 25, "score": 22, "deductions": [{ "reason": "TilemapSerializer 버전 필드 예약 부재", "points": 3 }] },
+    { "name": "코드 품질", "maxWeight": 15, "score": 15, "deductions": [] },
+    { "name": "스펙 커버리지", "maxWeight": 10, "score": 8, "deductions": [{ "reason": "ui-data 1B 담당 근거 명시 부족", "points": 2 }] }
+  ],
+  "improvementsVerified": { "queryRegistryPolicy": true, "defBoundarySpec": true, "tilemapVersion": false, "1bDocumentation": false },
+  "summary": "Phase 1 전체 구현 95점 통과. 미반영 2건(TilemapFormat 버전 예약, 1B 담당 근거 명시)은 loop2에서 보완.",
+  "improvements": ["TilemapFormat.cs 버전 상수 추가", "agents.md에 1B 담당 근거 섹션 추가"]
+}

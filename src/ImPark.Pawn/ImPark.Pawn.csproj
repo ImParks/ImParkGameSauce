@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>ImPark.Pawn</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImPark.Shared\ImPark.Shared.csproj" />
+    <ProjectReference Include="..\ImPark.Core\ImPark.Core.csproj" />
+  </ItemGroup>
+</Project>

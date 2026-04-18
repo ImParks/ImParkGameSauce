@@ -1,0 +1,10 @@
+{
+  "evaluationId": "impl-eval-20260417-phase2-loop1",
+  "stage": "implementation_evaluation",
+  "timestamp": "2026-04-17T09:00:00Z",
+  "task": "Phase 2 폰 + AI + 경로탐색",
+  "overallScore": 92,
+  "outcome": "failed",
+  "summary": "2A-2E 전 구현, 개선안 6건 중 3건 완료(jobGiverStub, unsupportedNeedsComment, pawnDiedOrderComment), 3건 미흡(medical migration 절차, Pawn Components delta, BT CurrentNodeIndex 인코딩).",
+  "improvements": ["medical OFF→ON 세이브 마이그레이션 4단계 절차 추가", "_PhaseDelta.md Pawn Components Phase 1→2 delta 문서", "BehaviorTreeComponent DFS 인덱스 인코딩 규격"]
+}

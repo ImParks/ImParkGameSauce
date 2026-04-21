@@ -1,0 +1,131 @@
+{
+  "evaluationId": "plan-eval-20260421-phase3-loop2",
+  "stage": "plan_evaluation",
+  "loopNumber": 2,
+  "timestamp": "2026-04-21T10:30:00Z",
+  "task": "Phase 3 건설+경제+환경",
+  "previousLoop": "plan-eval-20260421-phase3-loop1",
+  "previousScore": 90.70,
+  "loop1FixVerification": {
+    "fix1_room_system": {
+      "status": "resolved",
+      "details": "3A-construction.md에 Room 인식 시스템 완전 추가: RoomComponent(RoomId, IsOutdoor, schemaVersion=1), RoomFloodFillSystem(Order=55, 0.3ms, dirty queue+4Room/tick burst 제한), IRoomQuery 인터페이스(GetRoomIdAt, GetRoomTiles, IsIndoor, GetRoomStats), room.changed(sync) 이벤트. Phase 4 확장 훅 명시."
+    },
+    "fix2_spec_reorganization": {
+      "status": "resolved",
+      "details": "overview.md에 '원안 대비 스펙 재편성' 표 추가. 원안 3E(관계)→Phase 4G 이관 사유(사회적 상호작용과 밀접, 건설 루프에 선행 불필요), 원안 3F(레크리에이션)→Phase 4G 이관 사유(mood/breakdown 하위 시스템), 신규 3E/3F 도입 근거 모두 명시."
+    },
+    "fix3_schema_version": {
+      "status": "resolved",
+      "details": "3A~3D 모든 직렬화 대상 컴포넌트(7+4+3+4=18개)에 schemaVersion=1 컬럼 추가 확인."
+    }
+  },
+  "categories": [
+    {
+      "name": "에이전트 구성 적합성",
+      "weight": 25,
+      "score": 96,
+      "deductions": [
+        {
+          "description": "building-economy 부하 불균형 유지: 18컴포넌트/14시스템/9Def(Room 추가로 증가)로 전체 작업량의 ~65%. 병렬 그룹 전략으로 완화되나, 단일 에이전트 병목 잠재 위험 존재.",
+          "points": 3,
+          "severity": "minor",
+          "affectedPaths": ["overview.md"],
+          "status": "carried_from_loop1"
+        },
+        {
+          "description": "IJobGiver 구현체 어셈블리 배치: cross-agent.md에 명시적 어셈블리 기재 없으나, test-and-perf.md 파일 분할 섹션에서 WorkGivers/가 ImPark.Pawn 하위로 배치됨을 확인 가능. 암묵적으로 해소되었으나 cross-agent.md에 직접 명시가 바람직.",
+          "points": 1,
+          "severity": "minor",
+          "affectedPaths": ["cross-agent.md"],
+          "status": "partially_resolved"
+        }
+      ]
+    },
+    {
+      "name": "스펙 충족도",
+      "weight": 25,
+      "score": 100,
+      "deductions": [],
+      "notes": "Loop 1의 3건(Room 누락 critical -8, 관계 시스템 미문서화 critical -8, 레크리에이션 미문서화 minor -3) 모두 해소. 7개 서브페이즈(3A~3G)가 원안 대비 완전한 커버리지를 달성. Room 인식 시스템이 3A에 추가되어 Core 시스템 공백 해소."
+    },
+    {
+      "name": "실현 가능성",
+      "weight": 20,
+      "score": 98,
+      "deductions": [
+        {
+          "description": "buildingProduction 틱 예산 burst 미분석: 기존 예산 1ms 대비 Phase 3 소비 ~1.5ms(이벤트 기반 실질 ~0.3ms). 동시 건설 50건 burst 시나리오 분석 부재. Room 재계산의 burst 제한(4/tick)은 좋은 선례이나 건설/제작 쪽에는 동등한 분석 없음.",
+          "points": 2,
+          "severity": "minor",
+          "affectedPaths": ["test-and-perf.md"],
+          "status": "carried_from_loop1_reduced"
+        }
+      ],
+      "notes": "Loop 1의 OutdoorMarker+Room 판정 문제(-3)는 Room 시스템 추가로 완전 해소. IRoomQuery가 Phase 3에서 구현되므로 Phase 4 마이그레이션 경로 단순화."
+    },
+    {
+      "name": "확장성/유연성",
+      "weight": 15,
+      "score": 96,
+      "deductions": [
+        {
+          "description": "BuildingDef.PlacementRules 내부 구조 미정의: 3A-construction.md의 BuildingDef에 PlacementRules 필드가 있으나 가능한 규칙 타입(Adjacent, NotBlocked, Terrain 등), 조건 배열 포맷, 모딩 확장 가능 여부가 기술되지 않음.",
+          "points": 4,
+          "severity": "major",
+          "affectedPaths": ["3A-construction.md"],
+          "status": "carried_from_loop1"
+        }
+      ],
+      "notes": "IRoomQuery 설계가 Phase 4 확장에 잘 대비됨. room.changed 이벤트의 payload(RoomId, OldSize, NewSize, IsOutdoor)가 온도/인테리어/청결 시스템 구독에 충분."
+    },
+    {
+      "name": "규칙 완성도",
+      "weight": 15,
+      "score": 93,
+      "deductions": [
+        {
+          "description": "WorkSchedulerSystem 5ms 이월 측정 방식 미명시: '5ms 누적 시 다음 틱 이월 (LOD queue)'라는 규칙이 있으나, 측정 메커니즘(Stopwatch vs 폰 수 추정), 이월된 폰의 우선 처리 정책, 연속 이월 상한이 기술되지 않음.",
+          "points": 3,
+          "severity": "minor",
+          "affectedPaths": ["3E-work-priority.md"],
+          "status": "carried_from_loop1"
+        },
+        {
+          "description": "WorkPriorityComponent diff 직렬화 기준 미명시: 'Def 기본값과 동일 시 diff만 저장'에서 기준값(WorkTypeDef.DefaultPriority)과 diff 포맷(변경 쌍 배열 vs 전체 중 차이분)이 불분명.",
+          "points": 2,
+          "severity": "minor",
+          "affectedPaths": ["3E-work-priority.md"],
+          "status": "carried_from_loop1"
+        },
+        {
+          "description": "3E/3F 직렬화 컴포넌트에 schemaVersion 미표기: WorkPriorityComponent, CarryComponent(3E), PawnScheduleComponent(3F)는 직렬화 대상이나 schemaVersion 컬럼이 없음. 3A~3D에는 수정 반영되었으나 3E/3F는 누락. RULE-004 일관성 부족.",
+          "points": 2,
+          "severity": "minor",
+          "affectedPaths": ["3E-work-priority.md", "3F-schedule.md"],
+          "status": "new_finding"
+        }
+      ]
+    }
+  ],
+  "overallScore": 96.95,
+  "overallScoreCalculation": {
+    "에이전트 구성 적합성": "96 × 0.25 = 24.00",
+    "스펙 충족도": "100 × 0.25 = 25.00",
+    "실현 가능성": "98 × 0.20 = 19.60",
+    "확장성/유연성": "96 × 0.15 = 14.40",
+    "규칙 완성도": "93 × 0.15 = 13.95",
+    "합계": "24.00 + 25.00 + 19.60 + 14.40 + 13.95 = 96.95"
+  },
+  "outcome": "passed",
+  "summary": "Loop 1의 3건 필수 수정(Room 인식 시스템 추가, 스펙 재편성 사유 문서화, schemaVersion 추가) 모두 완전히 해소됨. 스펙 충족도가 81→100으로 대폭 개선. Room 시스템 추가로 IRoomQuery 인터페이스가 정의되어 Phase 4 마이그레이션 경로도 단순화됨. 잔여 감점(총 17점 가중 합산 ~3.05점)은 모두 minor/권장 수준으로 구현 단계에서 해결 가능. 96.95점으로 PASS 기준(95점) 충족.",
+  "improvements": [
+    "[권장] BuildingDef.PlacementRules 내부 구조 정의: 가능한 규칙 타입(Adjacent, NotBlocked, Terrain, Custom), 조건 배열 포맷, 모딩 확장성 명시. 구현 단계에서 Def 설계 시 확정 가능.",
+    "[권장] 3E/3F 직렬화 컴포넌트(WorkPriorityComponent, CarryComponent, PawnScheduleComponent)에 schemaVersion=1 추가. 3A~3D와 일관성 확보.",
+    "[권장] WorkSchedulerSystem 5ms 이월 측정 방식(Stopwatch.ElapsedMilliseconds 기반)과 이월 상한(연속 3틱 경고) 명시.",
+    "[권장] WorkPriorityComponent diff 직렬화 기준(WorkTypeDef.DefaultPriority 대비 변경 쌍 배열) 명시.",
+    "[권장] buildingProduction burst 시나리오(50 blueprints 동시) 분석 및 시간 분할 상한 추가.",
+    "[권장] cross-agent.md에 WorkGiver 구현체의 물리적 어셈블리 배치(ImPark.Pawn)를 명시적으로 기재."
+  ],
+  "exceptions": []
+}

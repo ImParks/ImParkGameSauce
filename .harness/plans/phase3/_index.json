@@ -1,0 +1,19 @@
+{
+  "planId": "phase3-construction-economy-environment",
+  "title": "Phase 3: 건설 + 경제 + 환경 기초",
+  "version": "1.0.0",
+  "createdAt": "2026-04-21",
+  "status": "draft",
+  "files": [
+    { "file": "overview.md", "description": "Phase 3 개요, 범위, 의존성 DAG, 에이전트 분담" },
+    { "file": "3A-construction.md", "description": "Blueprint + 건설 시스템" },
+    { "file": "3B-inventory.md", "description": "자원/인벤토리 시스템" },
+    { "file": "3C-crafting.md", "description": "작업대 + 제작 레시피 + 품질" },
+    { "file": "3D-zones.md", "description": "구역 관리 4종" },
+    { "file": "3E-work-priority.md", "description": "작업 우선순위 + Hauling" },
+    { "file": "3F-schedule.md", "description": "시간대별 활동 스케줄러" },
+    { "file": "3G-environment.md", "description": "온도/날씨/계절 기초" },
+    { "file": "cross-agent.md", "description": "에이전트 간 인터페이스, 이벤트 토픽 전체, 모듈 토글" },
+    { "file": "test-and-perf.md", "description": "테스트 플랜, 틱 예산 총괄, 파일 분할" }
+  ]
+}

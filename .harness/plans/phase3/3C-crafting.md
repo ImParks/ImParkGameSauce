@@ -1,11 +1,11 @@
 # 3C: 작업대 + 제작 레시피 + 품질
 
 ## 컴포넌트
-| Component | Fields | 직렬화 delta |
-|-----------|--------|-------------|
-| WorkbenchComponent | BillList(List&lt;Bill&gt;), WorkSpeedMultiplier, NextBillIndex | BillList 전체 직렬화 (사용자 설정 손실 금지) |
-| BillWorkProgressComponent | RecipeDefId, WorkRemaining, WorkTotal, InputStackIds | cancel-on-save (Phase 2 Job 정책 동일) |
-| IngredientReservationComponent | ReservedStackIds(long[]) | 로드 시 Bill 재평가로 재생성 → 저장 생략 |
+| Component | Fields | 직렬화 delta | schemaVersion |
+|-----------|--------|-------------|:---:|
+| WorkbenchComponent | BillList(List&lt;Bill&gt;), WorkSpeedMultiplier, NextBillIndex | BillList 전체 직렬화 (사용자 설정 손실 금지) | 1 |
+| BillWorkProgressComponent | RecipeDefId, WorkRemaining, WorkTotal, InputStackIds | cancel-on-save (Phase 2 Job 정책 동일) | 1 |
+| IngredientReservationComponent | ReservedStackIds(long[]) | 로드 시 Bill 재평가로 재생성 → 저장 생략 | 1 |
 
 ## Def
 | Def | 주요 필드 |

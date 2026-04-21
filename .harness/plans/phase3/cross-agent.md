@@ -16,7 +16,14 @@
 |-----------|------|------|
 | ISeasonQuery | environment-life | Growing zone 계절 참조 |
 | ITemperatureQuery | environment-life | Deterioration 실내/냉장 보정 (Phase 4) |
+| IRoomQuery | building-economy | environment-life: 온도 시뮬레이션 Room 단위 (Phase 4C) |
 | plant.sow-requested | building-economy 발행 | environment-life 소비 (Phase 4) |
+
+### building-economy 내부 (Room)
+| 인터페이스 | 소유 | 소비 | 용도 |
+|-----------|------|------|------|
+| IRoomQuery | building-economy | 다수 (온도/인테리어/청결) | Room 조회: GetRoomIdAt, IsIndoor, GetRoomTiles |
+| room.changed (sync) | RoomFloodFillSystem | TemperatureSystem(Phase 4), UI | Room 생성/변경/파괴 알림 |
 
 ### pawn-ai → pawn 도메인 (자기 영역)
 | 인터페이스 | 용도 |

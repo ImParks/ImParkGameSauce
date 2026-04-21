@@ -9,12 +9,12 @@
 | Forbidden | 진입/사용 금지 | 마커만 |
 
 ## 컴포넌트
-| Component | Fields | 직렬화 delta |
-|-----------|--------|-------------|
-| ZoneMembershipComponent | ZoneId, ZoneKind(byte) | ZoneService 비트맵 RLE로 별도 직렬화 |
-| ForbiddenComponent | IsForbidden(bool) 마커 | false 시 생략 |
-| StockpileSettingsComponent | Priority, AllowedItemFilter, QualityRange, HpRange | 기본 필터(모두 허용) 시 생략 |
-| GrowingZoneComponent | PlantDefId, SowPriority, AllowCut | PlantDefId=default 시 생략 |
+| Component | Fields | 직렬화 delta | schemaVersion |
+|-----------|--------|-------------|:---:|
+| ZoneMembershipComponent | ZoneId, ZoneKind(byte) | ZoneService 비트맵 RLE로 별도 직렬화 | 1 |
+| ForbiddenComponent | IsForbidden(bool) 마커 | false 시 생략 | 1 |
+| StockpileSettingsComponent | Priority, AllowedItemFilter, QualityRange, HpRange | 기본 필터(모두 허용) 시 생략 | 1 |
+| GrowingZoneComponent | PlantDefId, SowPriority, AllowCut | PlantDefId=default 시 생략 | 1 |
 
 ## Def
 | Def | 주요 필드 |

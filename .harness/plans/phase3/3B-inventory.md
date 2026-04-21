@@ -1,12 +1,12 @@
 # 3B: 자원/인벤토리
 
 ## 컴포넌트
-| Component | Fields | 직렬화 delta |
-|-----------|--------|-------------|
-| ItemStackComponent | ItemDefId, Count, HitPoints(short), Quality(byte 0~6, 255=NA) | Count==1 && Quality==NA && Hp==Max 시 필드 생략 |
-| StackableComponent | MaxStackSize(short, DefRef 캐시) | Def에서 복원 → 전체 생략 |
-| ContainerComponent | Contents(List&lt;long&gt;), CapacityMass, CurrentMass | 빈 리스트 시 생략, CurrentMass 재계산 가능 → 생략 |
-| DeteriorationComponent | DeteriorateRatePerDay, LastCheckedTick | Rate==0 시 생략 |
+| Component | Fields | 직렬화 delta | schemaVersion |
+|-----------|--------|-------------|:---:|
+| ItemStackComponent | ItemDefId, Count, HitPoints(short), Quality(byte 0~6, 255=NA) | Count==1 && Quality==NA && Hp==Max 시 필드 생략 | 1 |
+| StackableComponent | MaxStackSize(short, DefRef 캐시) | Def에서 복원 → 전체 생략 | 1 |
+| ContainerComponent | Contents(List&lt;long&gt;), CapacityMass, CurrentMass | 빈 리스트 시 생략, CurrentMass 재계산 가능 → 생략 | 1 |
+| DeteriorationComponent | DeteriorateRatePerDay, LastCheckedTick | Rate==0 시 생략 | 1 |
 
 ## Def
 | Def | 주요 필드 |
